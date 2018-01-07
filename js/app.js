@@ -4,9 +4,11 @@ $(document).ready(function(){
 	var $caracteres = $("#count");
 	var $maxCharacters = 140;
 	var $enviar = $("#tweet-btn");
+
+
 // funcion manejadora de eventos: asociada a eventos
 	$textarea.on('keyup', function(event){
-
+		$(this).css("color", "red"); 
 		$valor = $(this).val();
 
 		// si el  input tiene texto el disabled se desactiva
@@ -14,48 +16,32 @@ $(document).ready(function(){
 			$enviar.attr("disabled", false);
 			$caracteres.html($maxCharacters - ($(this).val()).length);
 			
-		// si el input esta vacio o es mayor a 140 el  disabled se activa
-		if (($valor.length == 0) || ($valor.length > $maxCharacters))
-			$enviar.attr("disabled", true);
-		 
+			if($caracteres > 120)
+		 	$valor.css("color", "green"); 
+		 	if($valor > 130)
+			$caracteres.css("color", "red"); 
 
-		if($valor.length > 120)
-				 $(this).css("color", "red"); 
-			
-			
+		// si el input esta vacio o es mayor a 140 el  disabled se activa
+		if (($valor.length === 0) || ($valor.length > $maxCharacters))
+			$enviar.attr("disabled", true);
 	});
 
-	// 	if($valor.length > 0) {
-	// 		$("#tweet-btn").attr("disabled", false);
-	// 		console.log($caracteres.html($maxCharacters - ($(this).val()).length));
-
-	// 		  if (($(this).val()).length >= 140) {
-	// 			$("#tweet-btn").attr("disabled", true);
-	// 		}
-	// 			else (($(this).val()).length >= 120) {
-	// 				 $(this).css("color", "red"); 
-	// 			}
-			
-
-	// 	 else { 
-	// 		$("#tweet-btn").attr("disabled", true); 
-			
-	// 	}
-
-	// });
-
 	
-
+	// enviar contenido  a un div
 	$("#tweet-btn").on("click", function(event){
 		event.preventDefault();
 		var $texto = $textarea.val();
+		$("#messages").addClass("estado");
 		$("#messages").prepend("<p>" + $texto + "</p>");
+
 		limpiar();
 
 	});
 
 	// linpiar input cuando se envie su contenido
 	function limpiar(){
-		$textarea.val(" ");
+		$textarea.val("");
 	}
+
+
 });

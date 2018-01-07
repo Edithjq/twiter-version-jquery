@@ -174,3 +174,11 @@ textarea:focus {
   display: table;
   clear: both;
 }
+
+/*mediante jquery creando clase para fondo de p*/
+.estado p{
+	margin:10px;
+	padding: 5px;
+	background-color: aqua;
+	color: white;
+}
